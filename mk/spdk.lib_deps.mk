@@ -132,6 +132,10 @@ endif
 
 DEPDIRS-bdev_aio := $(BDEV_DEPS_CONF_THREAD)
 DEPDIRS-bdev_crypto := $(BDEV_DEPS_CONF_THREAD)
+DEPDIRS-bdev_non_persistent_dedupas := $(BDEV_DEPS_CONF_THREAD)
+DEPDIRS-bdev_non_persistent_dedupas_sgx := $(BDEV_DEPS_CONF_THREAD)
+DEPDIRS-bdev_persistent_dedupas := $(BDEV_DEPS_CONF_THREAD)
+DEPDIRS-bdev_persistent_dedupas_sgx := $(BDEV_DEPS_CONF_THREAD)
 DEPDIRS-bdev_iscsi := $(BDEV_DEPS_CONF_THREAD)
 DEPDIRS-bdev_null := $(BDEV_DEPS_CONF_THREAD)
 DEPDIRS-bdev_nvme = $(BDEV_DEPS_CONF_THREAD) nvme

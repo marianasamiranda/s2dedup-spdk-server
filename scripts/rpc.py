@@ -694,6 +694,108 @@ if __name__ == "__main__":
     p.add_argument('name', help='pass through bdev name')
     p.set_defaults(func=bdev_passthru_delete)
 
+
+    def bdev_non_persistent_dedupas_create(args):
+        print_json(rpc.bdev.bdev_non_persistent_dedupas_create(args.client,
+                                                 base_bdev_name=args.base_bdev_name,
+                                                 name=args.name,
+                                                 blocklen=args.blocklen))
+
+    p = subparsers.add_parser('bdev_non_persistent_dedupas_create', aliases=['construct_non_persistent_dedupas_bdev'],
+                              help='Add a non-persistent dedupas bdev on existing bdev')
+    p.add_argument('-b', '--base-bdev-name', help="Name of the existing bdev", required=True)
+    p.add_argument('-p', '--name', help="Name of the non-persistent dedupas bdev", required=True)
+    p.add_argument('-l', '--blocklen', help="Blocklen", required=True)
+    p.set_defaults(func=bdev_non_persistent_dedupas_create)
+
+
+    def bdev_non_persistent_dedupas_delete(args):
+        rpc.bdev.bdev_non_persistent_dedupas_delete(args.client,
+                                      name=args.name)
+
+    p = subparsers.add_parser('bdev_non_persistent_dedupas_delete', aliases=['delete_non_persistent_dedupas_bdev'],
+                              help='Delete a non-persistent dedupas bdev')
+    p.add_argument('name', help='non-persistent dedupas bdev name')
+    p.set_defaults(func=bdev_non_persistent_dedupas_delete)
+
+    def bdev_non_persistent_dedupas_sgx_create(args):
+        print_json(rpc.bdev.bdev_non_persistent_dedupas_sgx_create(args.client,
+                                                 base_bdev_name=args.base_bdev_name,
+                                                 name=args.name,
+                                                 blocklen=args.blocklen,
+                                                 security_level=args.security_level,
+                                                 epoch_or_threshold=args.epoch_or_threshold))
+
+    p = subparsers.add_parser('bdev_non_persistent_dedupas_sgx_create', aliases=['construct_non_persistent_dedupas_sgx_bdev'],
+                              help='Add a non-persistent dedupas bdev  with sgx on existing bdev')
+    p.add_argument('-b', '--base-bdev-name', help="Name of the existing bdev", required=True)
+    p.add_argument('-p', '--name', help="Name of the non-persistent dedupas bdev with sgx", required=True)
+    p.add_argument('-l', '--blocklen', help="Blocklen", required=True)
+    p.add_argument('-s', '--security_level', help="Level of security (0-Plain, 1-Epoch, 2-Estimated, 3-Exact)", required=True)
+    p.add_argument('-t', '--epoch_or_threshold', help="Epoch duration in number of operations or threshold", required=False)
+    p.set_defaults(func=bdev_non_persistent_dedupas_sgx_create)
+
+
+    def bdev_non_persistent_dedupas_sgx_delete(args):
+        rpc.bdev.bdev_non_persistent_dedupas_sgx_delete(args.client,
+                                      name=args.name)
+
+    p = subparsers.add_parser('bdev_non_persistent_dedupas_sgx_delete', aliases=['delete_non_persistent_dedupas_sgx_bdev'],
+                              help='Delete a non-persistent dedupas with sgx bdev')
+    p.add_argument('name', help='non-persistent dedupas bdev with sgx name')
+    p.set_defaults(func=bdev_non_persistent_dedupas_sgx_delete)
+
+    def bdev_persistent_dedupas_create(args):
+        print_json(rpc.bdev.bdev_persistent_dedupas_create(args.client,
+                                                 base_bdev_name=args.base_bdev_name,
+                                                 name=args.name, 
+                                                 blocklen=args.blocklen))
+
+    p = subparsers.add_parser('bdev_persistent_dedupas_create', aliases=['construct_persistent_dedupas_bdev'],
+                              help='Add a persistent dedupas bdev on existing bdev')
+    p.add_argument('-b', '--base-bdev-name', help="Name of the existing bdev", required=True)
+    p.add_argument('-p', '--name', help="Name of the persistent dedupas bdev", required=True)
+    p.add_argument('-l', '--blocklen', help="Blocklen", required=True)
+    p.set_defaults(func=bdev_persistent_dedupas_create)
+
+
+    def bdev_persistent_dedupas_delete(args):
+        rpc.bdev.bdev_persistent_dedupas_delete(args.client,
+                                      name=args.name)
+
+    p = subparsers.add_parser('bdev_persistent_dedupas_delete', aliases=['delete_persistent_dedupas_bdev'],
+                              help='Delete a persistent dedupas bdev')
+    p.add_argument('name', help='persistent dedupas bdev name')
+    p.set_defaults(func=bdev_persistent_dedupas_delete)
+
+    def bdev_persistent_dedupas_sgx_create(args):
+        print_json(rpc.bdev.bdev_persistent_dedupas_sgx_create(args.client,
+                                                 base_bdev_name=args.base_bdev_name,
+                                                 name=args.name,
+                                                 blocklen=args.blocklen,
+                                                 security_level=args.security_level,
+                                                 epoch_or_threshold=args.epoch_or_threshold))
+
+    p = subparsers.add_parser('bdev_persistent_dedupas_sgx_create', aliases=['construct_persistent_dedupas_sgx_bdev'],
+                              help='Add a persistent dedupas bdev  with sgx on existing bdev')
+    p.add_argument('-b', '--base-bdev-name', help="Name of the existing bdev", required=True)
+    p.add_argument('-p', '--name', help="Name of the persistent dedupas bdev with sgx", required=True)
+    p.add_argument('-l', '--blocklen', help="Blocklen", required=True)
+    p.add_argument('-s', '--security_level', help="Level of security (0-Plain, 1-Epoch, 2-Estimated, 3-Exact)", required=True)
+    p.add_argument('-t', '--epoch_or_threshold', help="Epoch duration in number of operations or threshold", required=False)
+    p.set_defaults(func=bdev_persistent_dedupas_sgx_create)
+
+
+    def bdev_persistent_dedupas_sgx_delete(args):
+        rpc.bdev.bdev_persistent_dedupas_sgx_delete(args.client,
+                                      name=args.name)
+
+    p = subparsers.add_parser('bdev_persistent_dedupas_sgx_delete', aliases=['delete_persistent_dedupas_sgx_bdev'],
+                              help='Delete a persistent dedupas with sgx bdev')
+    p.add_argument('name', help='persistent dedupas bdev with sgx name')
+    p.set_defaults(func=bdev_persistent_dedupas_sgx_delete)
+
+
     def bdev_get_bdevs(args):
         print_dict(rpc.bdev.bdev_get_bdevs(args.client,
                                            name=args.name))

@@ -31,39 +31,14 @@
 #  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-SPDK_ROOT_DIR := $(abspath $(CURDIR)/../..)
+SPDK_ROOT_DIR := $(abspath $(CURDIR)/../../..)
 include $(SPDK_ROOT_DIR)/mk/spdk.common.mk
 
-DIRS-y += delay error gpt lvol malloc null nvme passthru raid rpc split zone_block
 
-DIRS-$(CONFIG_CRYPTO) += crypto
+CFLAGS += $(ENV_CFLAGS)  
 
-DIRS-$(CONFIG_NON_PERSISTENT_DEDUPAS) += non_persistent_dedup
+C_SRCS = vbdev_non_persistent_dedupas_sgx.c vbdev_non_persistent_dedupas_sgx_rpc.c interceptor.c metadata.c index.c freeblocks.c ciphras.c 
+LIBNAME = bdev_non_persistent_dedupas_sgx
 
-DIRS-$(CONFIG_NON_PERSISTENT_DEDUPAS_SGX) += non_persistent_dedup_sgx
 
-DIRS-$(CONFIG_PERSISTENT_DEDUPAS) += persistent_dedup
-
-DIRS-$(CONFIG_PERSISTENT_DEDUPAS_SGX) += persistent_dedup_sgx
-
-DIRS-$(CONFIG_OCF) += ocf
-
-DIRS-$(CONFIG_REDUCE) += compress
-
-DIRS-$(CONFIG_URING) += uring
-
-ifeq ($(OS),Linux)
-DIRS-y += aio ftl
-DIRS-$(CONFIG_ISCSI_INITIATOR) += iscsi
-DIRS-$(CONFIG_VIRTIO) += virtio
-DIRS-$(CONFIG_PMDK) += pmem
-endif
-
-DIRS-$(CONFIG_RBD) += rbd
-
-.PHONY: all clean $(DIRS-y)
-
-all: $(DIRS-y)
-clean: $(DIRS-y)
-
-include $(SPDK_ROOT_DIR)/mk/spdk.subdirs.mk
+include $(SPDK_ROOT_DIR)/mk/spdk.lib.mk

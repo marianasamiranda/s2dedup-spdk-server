@@ -135,7 +135,7 @@ CONFIG_VPP_DIR=
 CONFIG_ISCSI_INITIATOR=n
 
 # Enable the dependencies for building the crypto vbdev
-CONFIG_CRYPTO=n
+CONFIG_CRYPTO=y
 
 # Build spdk shared libraries in addition to the static ones.
 CONFIG_SHARED=n
@@ -145,10 +145,10 @@ CONFIG_VTUNE=n
 CONFIG_VTUNE_DIR=
 
 # Build the dpdk igb_uio driver
-CONFIG_IGB_UIO_DRIVER=n
+CONFIG_IGB_UIO_DRIVER=y
 
 # Build Intel IPSEC_MB library
-CONFIG_IPSEC_MB=n
+CONFIG_IPSEC_MB=y
 
 # Enable OCF module
 CONFIG_OCF=n
@@ -172,3 +172,17 @@ CONFIG_RAID5=n
 
 # Build with IDXD support
 CONFIG_IDXD=n
+
+############ Deduplication bdevs
+# Attentions: Only activate one deduplication bdev at a time!
+# Enable non-persistent dedupas vbdev 
+CONFIG_NON_PERSISTENT_DEDUPAS=n
+
+# Enable non-persistent dedupas vbdev with encryption
+CONFIG_NON_PERSISTENT_DEDUPAS_SGX=y
+
+# Enable persistent dedupas vbdev
+CONFIG_PERSISTENT_DEDUPAS=n
+
+# Enable persistent dedupas vbdev with encryption
+CONFIG_PERSISTENT_DEDUPAS_SGX=n

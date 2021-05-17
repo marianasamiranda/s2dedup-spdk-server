@@ -40,6 +40,32 @@ ifeq ($(CONFIG_CRYPTO),y)
 BLOCKDEV_MODULES_LIST += bdev_crypto
 endif
 
+ifeq ($(CONFIG_NON_PERSISTENT_DEDUPAS),y)
+BLOCKDEV_MODULES_LIST += bdev_non_persistent_dedupas
+SYS_LIBS += -lglib-2.0
+LDFLAGS += -L/usr/lib -lm -lglib-2.0
+SYS_LIBS += -m64 -Wall -O0 -g 
+endif
+
+ifeq ($(CONFIG_NON_PERSISTENT_DEDUPAS_SGX),y)
+BLOCKDEV_MODULES_LIST += bdev_non_persistent_dedupas_sgx
+SYS_LIBS += -lglib-2.0
+LDFLAGS += -L/usr/lib -lm -lglib-2.0
+SYS_LIBS += -m64 -Wall -O0 -g -lzlog -lsgx_urts -lenclavas
+endif
+
+ifeq ($(CONFIG_PERSISTENT_DEDUPAS),y)
+BLOCKDEV_MODULES_LIST += bdev_persistent_dedupas
+SYS_LIBS += -lstdc++ -lleveldb -lpthread -lsnappy
+SYS_LIBS += -m64 -Wall -O0 -g 
+endif
+
+ifeq ($(CONFIG_PERSISTENT_DEDUPAS_SGX),y)
+BLOCKDEV_MODULES_LIST += bdev_persistent_dedupas_sgx
+SYS_LIBS += -lstdc++ -lleveldb -lpthread -lsnappy
+SYS_LIBS += -m64 -Wall -O0 -g -lzlog -lsgx_urts -lenclavas
+endif
+
 ifeq ($(CONFIG_OCF),y)
 BLOCKDEV_MODULES_LIST += bdev_ocf
 BLOCKDEV_MODULES_LIST += ocfenv

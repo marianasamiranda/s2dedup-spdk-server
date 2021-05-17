@@ -73,7 +73,19 @@ endif
 TARGET_ARCHITECTURE ?= $(CONFIG_ARCH)
 TARGET_MACHINE := $(firstword $(TARGET_TRIPLET_WORDS))
 
-COMMON_CFLAGS = -g $(C_OPT) -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -Wmissing-declarations -fno-strict-aliasing -I$(SPDK_ROOT_DIR)/include
+COMMON_CFLAGS = -g $(C_OPT) -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers  -fno-strict-aliasing -I$(SPDK_ROOT_DIR)/include
+
+ifeq ($(CONFIG_NON_PERSISTENT_DEDUPAS),y)
+COMMON_CFLAGS += `pkg-config --cflags glib-2.0`
+endif
+
+ifeq ($(CONFIG_NON_PERSISTENT_DEDUPAS_SGX),y)
+COMMON_CFLAGS += `pkg-config --cflags glib-2.0` -DNDEBUG -DEDEBUG -UDEBUG -L/opt/intel/sgxsdk/lib64 -lsgx_urts -I/opt/intel/sgxsdk/include -lenclavas
+endif
+
+ifeq ($(CONFIG_PERSISTENT_DEDUPAS_SGX),y)
+COMMON_CFLAGS += -DNDEBUG -DEDEBUG -UDEBUG -L/opt/intel/sgxsdk/lib64 -lsgx_urts -I/opt/intel/sgxsdk/include -lenclavas
+endif
 
 ifneq ($(filter powerpc%,$(TARGET_MACHINE)),)
 COMMON_CFLAGS += -mcpu=$(TARGET_ARCHITECTURE)
@@ -230,7 +242,7 @@ ifeq ($(CONFIG_LOG_BACKTRACE),y)
 SYS_LIBS += -lunwind
 endif
 
-ifeq ($(CONFIG_NVME_CUSE),y)
+ifneq ($(CONFIG_NVME_CUSE)$(CONFIG_FUSE),nn)
 SYS_LIBS += -lfuse3
 endif
 

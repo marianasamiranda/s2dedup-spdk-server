@@ -965,6 +965,143 @@ def bdev_ocssd_delete(client, name):
     params = {'name': name}
 
     return client.call('bdev_ocssd_delete', params)
+ 
+
+@deprecated_alias('construct_non_persistent_dedupas_bdev')
+def bdev_non_persistent_dedupas_create(client, base_bdev_name, name, blocklen):
+    """Construct a non-persistent dedupas block device.
+
+    Args:
+        base_bdev_name: name of the existing bdev
+        name: name of block device
+        blocklen: blocklen
+
+    Returns:
+        Name of created block device.
+    """
+    params = {
+        'base_bdev_name': base_bdev_name,
+        'name': name,
+        'blocklen': blocklen,
+    }
+    return client.call('bdev_non_persistent_dedupas_create', params)
+
+
+@deprecated_alias('delete_non_persistent_dedupas_bdev')
+def bdev_non_persistent_dedupas_delete(client, name):
+    """Remove non-persistent dedupas bdev from the system.
+
+    Args:
+        name: name of non-persistent dedupas bdev to delete
+    """
+    params = {'name': name}
+    return client.call('bdev_non_persistent_dedupas_delete', params)
+
+
+@deprecated_alias('construct_non_persistent_dedupas_sgx_bdev')
+def bdev_non_persistent_dedupas_sgx_create(client, base_bdev_name, name, blocklen, security_level, epoch_or_threshold=None):
+    """Construct a non-persistent dedupas with sgx block device.
+
+    Args:
+        base_bdev_name: name of the existing bdev
+        name: name of block device
+        blocklen: blocklen
+        security_level: level of security
+        epoch_or_threshold: duration of epoch or threshold
+
+    Returns:
+        Name of created block device.
+    """
+    params = {
+        'base_bdev_name': base_bdev_name,
+        'name': name,
+        'blocklen': blocklen,
+        'security_level': security_level,
+    }
+    
+    if epoch_or_threshold:
+        params['epoch_or_threshold'] = epoch_or_threshold
+    return client.call('bdev_non_persistent_dedupas_sgx_create', params)
+
+
+@deprecated_alias('delete_non_persistent_dedupas_sgx_bdev')
+def bdev_non_persistent_dedupas_sgx_delete(client, name):
+    """Remove non-persistent dedupas bdev with sgx from the system.
+
+    Args:
+        name: name of non-persistent dedupas bdev with sgx to delete
+    """
+    params = {'name': name}
+    return client.call('bdev_non_persistent_dedupas_sgx_delete', params)
+
+
+@deprecated_alias('construct_persistent_dedupas_bdev')
+def bdev_persistent_dedupas_create(client, base_bdev_name, name, blocklen):
+    """Construct a persistent dedupas block device.
+
+    Args:
+        base_bdev_name: name of the existing bdev
+        name: name of block device
+        blocklen: blocklen
+
+    Returns:
+        Name of created block device.
+    """
+    params = {
+        'base_bdev_name': base_bdev_name,
+        'name': name,
+        'blocklen': blocklen,
+    }
+    return client.call('bdev_persistent_dedupas_create', params)
+
+
+@deprecated_alias('delete_persistent_dedupas_bdev')
+def bdev_persistent_dedupas_delete(client, name):
+    """Remove persistent dedupas bdev from the system.
+
+    Args:
+        name: name of persistent dedupas bdev to delete
+    """
+    params = {'name': name}
+    return client.call('bdev_persistent_dedupas_delete', params)
+
+
+@deprecated_alias('construct_persistent_dedupas_sgx_bdev')
+def bdev_persistent_dedupas_sgx_create(client, base_bdev_name, name, blocklen, security_level, epoch_or_threshold=None):
+    """Construct a persistent dedupas with sgx block device.
+
+    Args:
+        base_bdev_name: name of the existing bdev
+        name: name of block device
+        blocklen: blocklen
+        security_level: level of security
+        epoch_or_threshold: duration of epoch or threshold
+
+    Returns:
+        Name of created block device.
+    """
+    params = {
+        'base_bdev_name': base_bdev_name,
+        'name': name,
+        'blocklen': blocklen,
+        'security_level': security_level,
+    }
+
+    if epoch_or_threshold:
+        params['epoch_or_threshold'] = epoch_or_threshold
+
+    return client.call('bdev_persistent_dedupas_sgx_create', params)
+
+
+@deprecated_alias('delete_persistent_dedupas_sgx_bdev')
+def bdev_persistent_dedupas_sgx_delete(client, name):
+    """Remove persistent dedupas bdev with sgx from the system.
+
+    Args:
+        name: name of persistent dedupas bdev with sgx to delete
+    """
+    params = {'name': name}
+    return client.call('bdev_persistent_dedupas_sgx_delete', params)
 
 
 @deprecated_alias('get_bdevs')
