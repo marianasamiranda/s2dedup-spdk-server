@@ -9,7 +9,7 @@ sudo scripts/rpc.py nbd_start_disk Nvme0n1p2 /dev/nbd0
 #sudo mkfs.ext4 /dev/nbd0
 #sudo mkfs.ext4 /dev/nbd0
 
-sudo mount -o dax /dev/nbd0 ../leveldb_dir
+sudo mount -o dax /dev/nbd0 module/bdev/persistent_dedup/dbs
 
 sudo ./scripts/rpc.py bdev_persistent_dedupas_create  -b Nvme0n1p1 -p DedupasPA -l 4096
 
