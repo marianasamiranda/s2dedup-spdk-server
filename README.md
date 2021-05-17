@@ -48,6 +48,7 @@ Before starting the S2Dedup server is important to:
 - follow [SPDK installation instructions](https://spdk.io/doc/getting_started.html)
 - follow [Intel SGX installation instructions](https://github.com/intel/linux-sgx) and [S2Dedup SGX repository instructions](https://github.com/mmm97/s2dedup-sgx), if deploying a secure block device
 - install the *GLib* library if using the in memory alternative, or the *LevelDB* key-value store in case of the persistent approach.
+- define in the CONFIG file the virtual block device to use (e.g., CONFIG_NON_PERSISTENT_DEDUPAS=y)
 
 Afterwards, one can proceed to compile and start the server:
 ~~~{.sh}
